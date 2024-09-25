@@ -13,6 +13,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/media_pro_bot-1.0-SNAPSHOT.jar app.jar
 
-EXPOSE 8081
+EXPOSE 8085
 
 CMD ["java", "-jar", "app.jar"]
