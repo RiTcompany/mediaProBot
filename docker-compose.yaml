@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  postgresql1:
+    image: postgres:11
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=invest_notification
+      - POSTGRES_USER=invest_notification
+      - POSTGRES_PASSWORD=invest_notification
+    volumes:
+      - invest-notification-db-data:/var/lib/postgresql/data
+
+  redis1:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis-data:/data
