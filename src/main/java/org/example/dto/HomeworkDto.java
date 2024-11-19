@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class HomeworkDto {
-    private Long userId;
+    private String email;
     private Long lessonId;
 }

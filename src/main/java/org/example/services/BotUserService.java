@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 public interface BotUserService {
     BotUser getById(long botUserId);
 
+    BotUser getByEmail(String email);
+
     boolean existsByTgId(long tgId);
 
     BotUser getByChatIdAndRole(long chatId, ERole eRole) throws EntityNotFoundException;

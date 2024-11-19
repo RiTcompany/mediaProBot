@@ -27,6 +27,13 @@ public class BotUserServiceImpl implements BotUserService {
     }
 
     @Override
+    public BotUser getByEmail(String email) {
+        return botUserRepository.findByEmail(email).orElseThrow(() ->
+                new EntityNotFoundException("Не существует пользователя с email = ".concat(email))
+            );
+    }
+
+    @Override
     public boolean existsByTgId(long tgId) {
         return botUserRepository.existsByTgId(tgId);
     }

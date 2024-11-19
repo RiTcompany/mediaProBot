@@ -93,9 +93,9 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void addHomework(HomeworkDto homeworkDto, AbsSender sender) {
-        documentRepository.saveAndFlush(documentMapper.document(homeworkDto));
-        BotUser botUser = botUserService.getById(homeworkDto.getUserId());
+        BotUser botUser = botUserService.getByEmail(homeworkDto.getEmail());
         Lesson lesson = lessonService.getById(homeworkDto.getLessonId());
+        documentRepository.saveAndFlush(documentMapper.document(homeworkDto));
         MessageUtil.sendMessageText(
                 botUser.getTgId(),
                 "Поздравляю, ты можешь сдать домашнее задание по уроку \"%s\" из курса \"%s\""
