@@ -6,6 +6,7 @@ import org.example.enums.EConversation;
 import org.example.enums.EDocument;
 import org.example.enums.ERole;
 import org.example.exceptions.AbstractException;
+import org.example.exceptions.EntityNotFoundException;
 import org.example.services.BotUserService;
 import org.example.services.ConversationService;
 import org.example.services.DocumentService;
@@ -45,6 +46,9 @@ public class HomeworkSendCommand extends BotCommand {
             } else {
                 MessageUtil.sendMessageText(chat.getId(), "У вас нет доступных домашних заданий", absSender);
             }
+        } catch (EntityNotFoundException e) {
+            log.error(e.getMessage());
+            MessageUtil.sendMessageText(chat.getId(), "Недостаточно прав", absSender);
         } catch (AbstractException e) {
             log.error(e.getMessage());
             MessageUtil.sendMessageText(chat.getId(), "Что-то пошло не так, обратитесь в поддержку", absSender);

@@ -1,11 +1,10 @@
-package org.example.steps.impl.writer;
+package org.example.steps.impl.moderator;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dto.MessageDto;
 import org.example.dto.ResultDto;
 import org.example.entities.ChatHash;
 import org.example.entities.DocumentToCheck;
-import org.example.entities.UserCourse;
 import org.example.enums.ECheckStatus;
 import org.example.enums.EDocument;
 import org.example.exceptions.AbstractException;
@@ -17,7 +16,6 @@ import org.example.utils.MessageUtil;
 import org.example.utils.StepUtil;
 import org.example.utils.ValidUtil;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
 import java.io.File;
@@ -31,7 +29,7 @@ public class SendDocumentStep extends FileSendStep {
     private final UserCourseService userCourseService;
     private static final String PREPARE_MESSAGE_TEXT = "Отправьте документ, который вы хотите отправить ученику и напишите к нему строку из списка";
     private static final String STUDENT_MESSAGE_TEXT = "Ваш диплом!";
-    private static final Pattern pattern = Pattern.compile("^Студент: [a-zA-Zа-яА-яЁё ]+, Курс: [a-zA-Zа-яА-яЁё 0-9]+, tgId: \\d+$");
+    private static final Pattern pattern = Pattern.compile("^Студент: [a-zA-Zа-яА-яЁё ]+, Курс: [a-zA-Zа-яА-яЁё 0-9:]+, tgId: \\d+$");
     private static final Long MAX_FILE_SIZE_KB = 500L;
 
     @Override

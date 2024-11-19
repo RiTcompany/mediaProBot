@@ -1,10 +1,10 @@
 package org.example.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.bots.MyWebHookBot;
 import org.example.builders.MessageBuilder;
 import org.example.builders.PageableInlineKeyboardMarkupBuilder;
 import org.example.dto.KeyboardDto;
+import org.telegram.telegrambots.bots.DefaultAbsSender;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -124,7 +124,7 @@ public class MessageUtil {
     private static java.io.File downloadFile(File fileInfo, AbsSender sender) {
         try {
             String filePath = fileInfo.getFilePath();
-            return ((MyWebHookBot) sender).downloadFile(
+            return ((DefaultAbsSender) sender).downloadFile(
                     filePath, new java.io.File(FILE_STORAGE_PATH.concat(filePath))
             );
         } catch (TelegramApiException e) {

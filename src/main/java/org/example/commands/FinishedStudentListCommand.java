@@ -28,7 +28,7 @@ public class FinishedStudentListCommand extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
         try {
-            BotUser botUser = botUserService.getByChatIdAndRole(chat.getId(), ERole.ROLE_WRITER);
+            BotUser botUser = botUserService.getByChatIdAndRole(chat.getId(), ERole.ROLE_MODERATOR);
             MessageUtil.sendMessageText(chat.getId(), userCourseService.getFinishedUserListText(), absSender);
         } catch (EntityNotFoundException e) {
             log.error(e.getMessage());

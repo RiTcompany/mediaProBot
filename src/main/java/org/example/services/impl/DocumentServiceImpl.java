@@ -5,7 +5,6 @@ import org.example.dto.HomeworkDto;
 import org.example.entities.BotUser;
 import org.example.entities.DocumentToCheck;
 import org.example.entities.Lesson;
-import org.example.entities.UserLesson;
 import org.example.enums.ECheckStatus;
 import org.example.enums.EDocument;
 import org.example.enums.ERole;

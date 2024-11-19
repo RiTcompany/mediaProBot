@@ -1,7 +1,7 @@
 package org.example.configs;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.bots.MyWebHookBot;
+import org.example.bots.MyLongPoolingBot;
 import org.example.services.CommandService;
 import org.example.services.UpdateHandleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.CommandRegistry;
-import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Slf4j
 @Configuration
@@ -20,22 +22,15 @@ public class BotConfig {
     private String name;
     @Value("${telegram.bot.token}")
     private String token;
-    @Value("${telegram.webhook-path}")
-    String webhookPath;
 
     @Bean
-    public MyWebHookBot tgLongPoolingBot(
-            @Autowired UpdateHandleService updateHandleService,
-            SetWebhook setWebhook
-    ) {
+    public MyLongPoolingBot tgLongPoolingBot(@Autowired UpdateHandleService updateHandleService) {
         if (isBotEnabled) {
-            MyWebHookBot bot = new MyWebHookBot(token, setWebhook);
-            bot.setBotPath(webhookPath);
-            bot.setBotUsername(name);
-            bot.setUpdateHandleService(updateHandleService);
-
+            MyLongPoolingBot TGLongPoolingBot = new MyLongPoolingBot(
+                    name, token, updateHandleService
+            );
             log.info("Bot initialized");
-            return bot;
+            return TGLongPoolingBot;
         }
 
         log.error("Bot was not initialized");
@@ -43,8 +38,10 @@ public class BotConfig {
     }
 
     @Bean
-    public SetWebhook setWebhookInstance() {
-        return SetWebhook.builder().url(webhookPath).build();
+    public TelegramBotsApi telegramBotsApi(MyLongPoolingBot myTelegramTGLongPoolingBot) throws TelegramApiException {
+        TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+        botsApi.registerBot(myTelegramTGLongPoolingBot);
+        return botsApi;
     }
 
     @Bean

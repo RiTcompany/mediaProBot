@@ -45,10 +45,9 @@ public abstract class CheckDocumentCommand extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
         try {
+            BotUser botUser = botUserService.getByChatIdAndRole(chat.getId(), ERole.ROLE_MODERATOR);
             DocumentToCheck documentToCheck = documentService.getToCheck(getDocumentType());
-
             if (documentToCheck != null) {
-                BotUser botUser = botUserService.getByChatIdAndRole(chat.getId(), ERole.ROLE_MODERATOR);
                 documentService.setModerator(documentToCheck, botUser.getId());
                 conversationService.startConversation(chat.getId(), getConversationType(), absSender);
             } else {

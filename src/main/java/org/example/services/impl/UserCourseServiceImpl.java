@@ -32,7 +32,7 @@ public class UserCourseServiceImpl implements UserCourseService {
                 BotUser botUser = botUserService.getById(userCourse.getUserId());
                 Course course = courseService.getById(userCourse.getCourseId());
                 result.append("Студент: %s, Курс: %s, tgId: %d\n"
-                        .formatted(botUser.getFullName(), course.getName(), botUser.getTgId())
+                        .formatted(botUser.getName(), course.getName(), botUser.getTgId())
                 );
             });
             return result.toString();

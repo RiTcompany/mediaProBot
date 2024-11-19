@@ -60,7 +60,7 @@ public class HomeworkChoiceStep extends ChoiceStep {
     }
 
     private KeyboardDto keyboardDto(ChatHash chatHash) {
-        BotUser botUser = botUserService.getByChatIdAndRole(chatHash.getId(), ERole.ROLE_USER);
+        BotUser botUser = botUserService.getByChatIdAndRole(chatHash.getChatId(), ERole.ROLE_USER);
         return keyboardMapper.keyboardDto(chatHash, getButtonList(
                 documentService.getHomeworkToSendListByUserId(botUser.getId())
         ));

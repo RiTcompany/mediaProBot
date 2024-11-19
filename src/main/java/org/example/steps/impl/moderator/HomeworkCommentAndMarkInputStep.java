@@ -40,7 +40,7 @@ public class HomeworkCommentAndMarkInputStep extends InputStep {
 
     @Override
     public void prepare(ChatHash chatHash, AbsSender sender) throws AbstractException {
-        BotUser botUser = botUserService.getByChatIdAndRole(chatHash.getId(), ERole.ROLE_MODERATOR);
+        BotUser botUser = botUserService.getByChatIdAndRole(chatHash.getChatId(), ERole.ROLE_MODERATOR);
         DocumentToCheck documentToCheck = documentService.getCheckingDocument(
                 botUser.getId(), EDocument.HOMEWORK
         );
@@ -49,7 +49,7 @@ public class HomeworkCommentAndMarkInputStep extends InputStep {
                 MessageBuilder.create()
                         .setFile(new File(documentToCheck.getPath()))
                         .setText(PREPARE_MESSAGE_TEXT)
-                        .sendDocument(chatHash.getId()),
+                        .sendDocument(chatHash.getChatId()),
                 sender
         );
 
@@ -86,7 +86,7 @@ public class HomeworkCommentAndMarkInputStep extends InputStep {
 
     @Override
     protected int finishStep(ChatHash chatHash, AbsSender sender, String data) throws EntityNotFoundException {
-        long moderatorId = botUserService.getByChatIdAndRole(chatHash.getId(), ERole.ROLE_MODERATOR).getId();
+        long moderatorId = botUserService.getByChatIdAndRole(chatHash.getChatId(), ERole.ROLE_MODERATOR).getId();
         DocumentToCheck documentToCheck = documentService.saveResponse(
                 moderatorId, data, EDocument.HOMEWORK
         );

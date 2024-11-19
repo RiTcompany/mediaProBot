@@ -11,4 +11,6 @@ public interface BotUserRepository extends JpaRepository<BotUser, Long> {
     boolean existsByTgId(long tgId);
 
     Optional<BotUser> findByTgId(long tgId);
+
+    Optional<BotUser> findByEmail(String email);
 }
