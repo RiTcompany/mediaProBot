@@ -24,7 +24,7 @@ public class DocumentMapper {
 
     public DocumentToCheck document(HomeworkDto homeworkDto) {
         DocumentToCheck documentToCheck = new DocumentToCheck();
-        documentToCheck.setChatId(botUserService.getById(homeworkDto.getUserId()).getTgId());
+        documentToCheck.setChatId(botUserService.getByEmail(homeworkDto.getEmail()).getTgId());
         documentToCheck.setLessonId(homeworkDto.getLessonId());
         documentToCheck.setDocumentType(EDocument.HOMEWORK);
         documentToCheck.setStatus(ECheckStatus.READY_TO_SEND);
