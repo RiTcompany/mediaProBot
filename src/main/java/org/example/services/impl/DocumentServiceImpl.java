@@ -93,7 +93,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public void addHomework(HomeworkDto homeworkDto, AbsSender sender) {
+    public void addHomework(HomeworkDto homeworkDto, AbsSender sender) throws NoTgIdException, EntityNotFoundException {
         BotUser botUser = botUserService.getByEmail(homeworkDto.getEmail());
         if (botUser.getTgId() == null) {
             throw new NoTgIdException("Пользователь не авторизован в тг боте");

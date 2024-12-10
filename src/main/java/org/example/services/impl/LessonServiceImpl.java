@@ -13,7 +13,7 @@ public class LessonServiceImpl implements LessonService {
     private final LessonRepository lessonRepository;
 
     @Override
-    public Lesson getById(Long lessonId) {
+    public Lesson getById(Long lessonId) throws EntityNotFoundException {
         return lessonRepository.findById(lessonId).orElseThrow(() ->
                 new EntityNotFoundException("Не существует урока с ID = ".concat(String.valueOf(lessonId)))
         );

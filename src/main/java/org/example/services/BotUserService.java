@@ -18,5 +18,5 @@ public interface BotUserService {
 
     boolean hasRole(BotUser botUser, ERole eRole);
 
-    void register(RegisterDto registerDto);
+    void register(RegisterDto registerDto) throws EntityNotFoundException;
 }

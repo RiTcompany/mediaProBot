@@ -58,7 +58,7 @@ public class BotUserServiceImpl implements BotUserService {
     }
 
     @Override
-    public void register(RegisterDto registerDto) {
+    public void register(RegisterDto registerDto) throws EntityNotFoundException {
         BotUser botUser = botUserRepository.findByEmail(registerDto.getEmail()).orElseThrow(() ->
                 new EntityNotFoundException("Не существует пользователя с email = ".concat(registerDto.getEmail()))
         );

@@ -4,6 +4,7 @@ import org.example.dto.HomeworkDto;
 import org.example.entities.DocumentToCheck;
 import org.example.enums.EDocument;
 import org.example.exceptions.EntityNotFoundException;
+import org.example.exceptions.NoTgIdException;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
@@ -23,7 +24,7 @@ public interface DocumentService {
 
     boolean maySendHomework(long chatId, EDocument eDocument);
 
-    void addHomework(HomeworkDto homeworkDto, AbsSender sender);
+    void addHomework(HomeworkDto homeworkDto, AbsSender sender) throws NoTgIdException, EntityNotFoundException;
 
     boolean existsById(Long documentId);
 
