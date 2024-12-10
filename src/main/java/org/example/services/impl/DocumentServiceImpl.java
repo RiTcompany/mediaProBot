@@ -9,6 +9,7 @@ import org.example.enums.ECheckStatus;
 import org.example.enums.EDocument;
 import org.example.enums.ERole;
 import org.example.exceptions.EntityNotFoundException;
+import org.example.exceptions.NoTgIdException;
 import org.example.mappers.DocumentMapper;
 import org.example.repositories.DocumentRepository;
 import org.example.services.BotUserService;
@@ -94,6 +95,10 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public void addHomework(HomeworkDto homeworkDto, AbsSender sender) {
         BotUser botUser = botUserService.getByEmail(homeworkDto.getEmail());
+        if (botUser.getTgId() == null) {
+            throw new NoTgIdException("Пользователь не авторизован в тг боте");
+        }
+
         Lesson lesson = lessonService.getById(homeworkDto.getLessonId());
         documentRepository.saveAndFlush(documentMapper.document(homeworkDto));
         MessageUtil.sendMessageText(
