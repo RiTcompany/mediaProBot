@@ -1,6 +1,7 @@
 package org.example.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.commands.ExtraInfoCommand;
 import org.example.commands.FinishedStudentListCommand;
 import org.example.commands.InfoCommand;
 import org.example.commands.SendBotDocumentCommand;
@@ -16,6 +17,7 @@ import org.telegram.telegrambots.extensions.bots.commandbot.commands.CommandRegi
 public class CommandServiceImpl implements CommandService {
     private final StartCommand startCommand;
     private final InfoCommand infoCommand;
+    private final ExtraInfoCommand extraInfoCommand;
     private final HomeworkSendCommand homeworkSendCommand;
     private final CheckHomeworkCommand checkHomeworkCommand;
     private final FinishedStudentListCommand finishedStudentListCommand;
@@ -25,6 +27,7 @@ public class CommandServiceImpl implements CommandService {
         CommandRegistry commandRegistry = new CommandRegistry(true, () -> botName);
         commandRegistry.register(startCommand);
         commandRegistry.register(infoCommand);
+        commandRegistry.register(extraInfoCommand);
         commandRegistry.register(homeworkSendCommand);
         commandRegistry.register(checkHomeworkCommand);
         commandRegistry.register(finishedStudentListCommand);
