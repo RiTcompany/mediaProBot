@@ -25,7 +25,7 @@ public class StartCommand extends BotCommand {
     private static final String REGISTER_MESSAGE = """
             Привет, дорогой друг!\s
             Я – бот Медиа Про. Здесь ты сможешь отправлять свои домашние задания и получать обратную связь!
-            Пожалуйста перейди по ссылке для окончания регистрации""";
+            Пожалуйста, перейди по ссылке для окончания регистрации""";
 
     public StartCommand(BotUserService botUserService) {
         super("start", "Start command");
