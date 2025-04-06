@@ -30,7 +30,7 @@ public class BotUserServiceImpl implements BotUserService {
     public BotUser getByEmail(String email) {
         return botUserRepository.findByEmail(email).orElseThrow(() ->
                 new EntityNotFoundException("Не существует пользователя с email = ".concat(email))
-            );
+        );
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BotUserServiceImpl implements BotUserService {
         BotUser botUser = botUserRepository.findByTgId(chatId)
                 .orElseThrow(() -> getException(eRole, chatId));
 
-        if (!hasRole(botUser, eRole)) {
+        if (!hasRole(botUser, eRole) && !botUser.hasSubscription()) {
             throw getException(eRole, chatId);
         }
 

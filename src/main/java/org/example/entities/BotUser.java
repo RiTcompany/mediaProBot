@@ -39,4 +39,11 @@ public class BotUser {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> roleList;
+
+    @Column(name = "subscription_id")
+    private Integer subscriptionId;
+
+    public boolean hasSubscription() {
+        return subscriptionId != null;
+    }
 }
