@@ -48,7 +48,7 @@ public class HomeworkSendCommand extends BotCommand {
             }
         } catch (EntityNotFoundException e) {
             log.error(e.getMessage());
-            MessageUtil.sendMessageText(chat.getId(), "Недостаточно прав", absSender);
+            MessageUtil.sendMessageText(chat.getId(), "Недостаточно прав.", absSender);
         } catch (AbstractException e) {
             log.error(e.getMessage());
             MessageUtil.sendMessageText(chat.getId(), "Что-то пошло не так, обратитесь в поддержку", absSender);
